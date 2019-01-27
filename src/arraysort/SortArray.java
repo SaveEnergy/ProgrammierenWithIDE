@@ -6,8 +6,11 @@ public class SortArray {
 
   public static void main(String[] args) {
 
+    Scanner scanner = new Scanner(System.in);
+
     System.out.print("Bitte geben Sie ein Zahlenfolge ein: ");
-    String inputString = new Scanner(System.in).nextLine();
+    String inputString = scanner.nextLine();
+
     String[] stringArray = inputString.split(" ");
     int[] intArray = new int[stringArray.length];
 
@@ -17,8 +20,9 @@ public class SortArray {
 
     new SortArray().sort(intArray);
 
-    System.out.println("Sollen die Zahlen aufsteigend oder absteigend sortiert werden?\n aufsteigend[1]\n absteigend[2]");
-    int inputNumber = new Scanner(System.in).nextInt();
+    System.out.println("Sollen die Zahlen aufsteigend oder absteigend sortiert werden?\n"
+        + "aufsteigend[1]\n absteigend[2]");
+    int inputNumber = scanner.nextInt();
 
     if (inputNumber == 1) {
       for (int number : intArray) {
