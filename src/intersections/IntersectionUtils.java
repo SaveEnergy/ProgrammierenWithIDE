@@ -12,7 +12,7 @@ public class IntersectionUtils {
 
   private int[] firstArray;
   private int[] secondArray;
-  private int[] resultArray = {};
+  private int[] resultArray = new int[1];
   private JoinType join;
 
 
@@ -29,11 +29,11 @@ public class IntersectionUtils {
   }
 
   private void innerJoin() {
-    for (int first = 0; first < firstArray.length; first++) {
-      for (int second = 0; second < secondArray.length; second++) {
-        if (firstArray[first] == secondArray[second]) {
-          Arrays.copyOf(resultArray, resultArray.length + 1);
-          resultArray[resultArray.length - 1] = firstArray[first];
+    for (int first : firstArray) {
+      for (int second : secondArray) {
+        if (resultArray[resultArray.length - 1] != second && first == second) {
+          resultArray = Arrays.copyOf(resultArray, resultArray.length + 1);
+          resultArray[resultArray.length - 1] = first;
         }
       }
     }
