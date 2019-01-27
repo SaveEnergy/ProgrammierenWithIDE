@@ -1,7 +1,5 @@
 package intersections;
 
-import intersections.IntersectionUtils.JoinType;
-
 public class IntersectionUtilsMain {
 
   public static void main(String[] args) {
@@ -9,8 +7,8 @@ public class IntersectionUtilsMain {
     int array2[] = {3, 5, 6};
 
 
-      for (int value : new IntersectionUtils().compare(array1, array2, JoinType.INNER)) {
-        System.out.println(value);
+      for (int value : new IntersectionUtils().compare(array1, array2, "inner")) {
+        System.out.print(value + " ");
       }
 
 

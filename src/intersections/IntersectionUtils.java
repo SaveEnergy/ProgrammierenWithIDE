@@ -16,27 +16,39 @@ public class IntersectionUtils {
   private JoinType join;
 
 
-  public int[] compare(int[] firstArray, int[] secondArray, JoinType join) {
+  public int[] compare(int[] firstArray, int[] secondArray, String joinType) {
 
-    this.join = join;
     this.firstArray = firstArray;
     this.secondArray = secondArray;
 
-    innerJoin();
+    if (joinType.equals("inner")) {
+      join = JoinType.INNER;
+      innerJoin();
+    }
+    if (joinType.equals("outer")) {
+      join = JoinType.OUTER;
+    }
+    if (joinType.equals("full")) {
+      join = JoinType.FULL;
+    }
 
     return resultArray;
 
   }
 
   private void innerJoin() {
+
     for (int first : firstArray) {
       for (int second : secondArray) {
         if (resultArray[resultArray.length - 1] != second && first == second) {
           resultArray = Arrays.copyOf(resultArray, resultArray.length + 1);
-          resultArray[resultArray.length - 1] = first;
+          resultArray[resultArray.length - 1] = second;
         }
       }
     }
+
+    resultArray = Arrays.copyOfRange(resultArray, 1, resultArray.length);
+
   }
 
 }
