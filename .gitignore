@@ -23,5 +23,6 @@
 hs_err_pid*
 
 # Intellij Configuration
-\.idea/
+out/
+.idea/
 *.iml
