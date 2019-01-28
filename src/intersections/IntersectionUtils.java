@@ -41,7 +41,11 @@ public class IntersectionUtils {
       }
     }
 
-    return Arrays.copyOfRange(resultArray, 1, resultArray.length);
+    if (notInArray(firstArray, 0)) {
+      return Arrays.copyOfRange(resultArray, 1, resultArray.length);
+    }
+
+    return resultArray;
 
   }
 
@@ -55,10 +59,14 @@ public class IntersectionUtils {
     }
 
     for (int second : secondArray) {
-      if (notInArray(firstArray, second)) {
+      if (notInArray(resultArray, second) && notInArray(firstArray, second)) {
         resultArray = extendArray(resultArray);
         resultArray[resultArray.length - 1] = second;
       }
+    }
+
+    if (notInArray(firstArray, 0) || notInArray(secondArray, 0)) {
+      return resultArray;
     }
 
     return Arrays.copyOfRange(resultArray, 1, resultArray.length);
@@ -81,8 +89,11 @@ public class IntersectionUtils {
       }
     }
 
-    return Arrays.copyOfRange(resultArray, 1, resultArray.length);
+    if (notInArray(firstArray, 0) && notInArray(secondArray, 0)) {
+      return Arrays.copyOfRange(resultArray, 1, resultArray.length);
+    }
 
+    return resultArray;
   }
 
   private boolean notInArray(int[] arrayOne, int value) {
