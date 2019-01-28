@@ -13,42 +13,76 @@ public class IntersectionUtils {
   private int[] firstArray;
   private int[] secondArray;
   private int[] resultArray = new int[1];
-  private JoinType join;
-
 
   public int[] compare(int[] firstArray, int[] secondArray, String joinType) {
 
     this.firstArray = firstArray;
     this.secondArray = secondArray;
 
-    if (joinType.equals("inner")) {
-      join = JoinType.INNER;
-      innerJoin();
-    }
-    if (joinType.equals("outer")) {
-      join = JoinType.OUTER;
-    }
-    if (joinType.equals("full")) {
-      join = JoinType.FULL;
-    }
+    JoinType join = JoinType.valueOf(joinType);
 
-    return resultArray;
+    switch (join) {
+      case INNER: return innerJoin();
+      case OUTER: return innerJoin();
+      case FULL: return fullJoin();
+      default: return new int[1];
+    }
 
   }
 
-  private void innerJoin() {
+  private int[] innerJoin() {
 
     for (int first : firstArray) {
       for (int second : secondArray) {
-        if (resultArray[resultArray.length - 1] != second && first == second) {
-          resultArray = Arrays.copyOf(resultArray, resultArray.length + 1);
+        if (notInArray(resultArray, second) && first == second) {
+          resultArray = extendArray(resultArray);
           resultArray[resultArray.length - 1] = second;
         }
       }
     }
 
-    resultArray = Arrays.copyOfRange(resultArray, 1, resultArray.length);
+    return Arrays.copyOfRange(resultArray, 1, resultArray.length);
 
+  }
+
+  private  int[] outerJoin() {
+    
+  }
+
+  private int[] fullJoin() {
+
+    for (int first : firstArray) {
+      if (notInArray(resultArray, first)) {
+        resultArray = extendArray(resultArray);
+        resultArray[resultArray.length - 1] = first;
+      }
+    }
+
+    for (int second : secondArray) {
+      if (notInArray(resultArray, second)) {
+        resultArray = extendArray(resultArray);
+        resultArray[resultArray.length - 1] = second;
+      }
+    }
+
+    return Arrays.copyOfRange(resultArray, 1, resultArray.length);
+
+  }
+
+  private boolean notInArray(int[] arrayOne, int value) {
+
+    for (int one : arrayOne) {
+       if (value == one) {
+         return false;
+       }
+    }
+
+    return true;
+
+  }
+
+  private int[] extendArray(int[] arrayExtend) {
+    return Arrays.copyOf(arrayExtend, arrayExtend.length + 1);
   }
 
 }
