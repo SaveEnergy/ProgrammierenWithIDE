@@ -23,7 +23,7 @@ public class IntersectionUtils {
 
     switch (join) {
       case INNER: return innerJoin();
-      case OUTER: return innerJoin();
+      case OUTER: return outerJoin();
       case FULL: return fullJoin();
       default: return new int[1];
     }
@@ -46,7 +46,23 @@ public class IntersectionUtils {
   }
 
   private  int[] outerJoin() {
-    
+
+    for (int first : firstArray) {
+      if (notInArray(resultArray, first) && notInArray(secondArray, first)) {
+        resultArray = extendArray(resultArray);
+        resultArray[resultArray.length - 1] = first;
+      }
+    }
+
+    for (int second : secondArray) {
+      if (notInArray(firstArray, second)) {
+        resultArray = extendArray(resultArray);
+        resultArray[resultArray.length - 1] = second;
+      }
+    }
+
+    return Arrays.copyOfRange(resultArray, 1, resultArray.length);
+
   }
 
   private int[] fullJoin() {
