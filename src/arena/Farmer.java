@@ -2,12 +2,12 @@ package arena;
 
 import java.util.Random;
 
-public class Knight implements Fighter {
+public class Farmer implements Fighter {
 
   private String name;
   private int strength;
 
-  public Knight(String name) {
+  public Farmer(String name) {
     this.name = name;
     this.strength = new Random().nextInt(101);
   }

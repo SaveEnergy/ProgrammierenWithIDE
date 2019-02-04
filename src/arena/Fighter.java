@@ -1,15 +1,12 @@
 package arena;
 
-import java.util.Random;
-
 public interface Fighter {
 
-  static int strength() {
-    return new Random().nextInt(101);
-  }
+  String getName();
+  int strength();
 
   default Fighter fightAgainst(Fighter fighter) {
-    return this;
+    return this.strength() > fighter.strength() ? this : fighter;
   }
 
 }
