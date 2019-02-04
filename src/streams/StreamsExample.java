@@ -20,7 +20,7 @@ public class StreamsExample {
         .map(String::length)
         .collect(Collectors.toList());
 
-    List<String> wordsWithLength = words
+    List<String> wordsAndLength = words
         .stream()
         .map(word -> word + " (" + word.length() + ")")
         .collect(Collectors.toList());
@@ -28,10 +28,11 @@ public class StreamsExample {
     words.forEach(word -> System.out.println("Word: " + word));
 
     System.out.println();
-    integers.forEach(integer -> System.out.println("Amount of Symbols: " + integer));
+    wordsAndLength.forEach(System.out::println);
 
     System.out.println();
-    wordsWithLength.forEach(System.out::println);
+    integers.forEach(integer -> System.out.println("Amount of Symbols: " + integer));
+
 
 
     String longestWord = words
