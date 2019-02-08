@@ -6,21 +6,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class LottoFeldGenerator {
+public class LuckyFieldGenerator {
+
+  private Stream<Integer> createIntStream(int amount) {
+    return new Random()
+        .ints(1, amount + 1)
+        .distinct()
+        .limit(6)
+        .boxed();
+  }
 
 
   public List<Integer> createField() {
 
-    ArrayList<Integer> field = new ArrayList<>(6);
-
-    new Random().ints(1, 50)
-        .distinct()
-        .limit(6)
-        .sorted()
-        .forEach(field::add);
-
-    return field;
+    return createIntStream(49).sorted().collect(Collectors.toList());
 
   }
 
