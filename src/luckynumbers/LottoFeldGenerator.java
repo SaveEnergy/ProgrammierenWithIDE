@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class LottoFeldGenerator {
 
+
   public List<Integer> createField() {
 
     ArrayList<Integer> field = new ArrayList<>(6);
@@ -27,11 +28,23 @@ public class LottoFeldGenerator {
 
     HashMap<Integer, List<Integer>> fields = new HashMap<>(number);
 
-    for (int index = 0; index < number; index++) {
+    for (int index = 1; index < number + 1; index++) {
       fields.put(index, createField());
     }
 
     return fields;
+
+  }
+
+  public Map<Integer, List<Integer>> createFieldsBackwards(int number) {
+
+    Map<Integer, List<Integer>> reversedFields = createFields(number);
+
+    for (List<Integer> values : reversedFields.values()) {
+      Collections.reverse(values);
+    }
+
+    return reversedFields;
 
   }
 
